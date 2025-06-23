@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernandes Tecnologias - Elétrica e Automação Residencial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #212529;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .service-tab.active {
+            border-color: #F97316;
+            background-color: #FFFFFF;
+            color: #F97316;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Chosen Palette: Warm Harmony Neutrals -->
+    <!-- Application Structure Plan: A single-page application designed with a clear user flow: Hero section for immediate impact and brand recognition, followed by an interactive 'Services' section using a tabbed interface. This structure was chosen to transform the static brochure content into an engaging, exploratory experience. Each tab reveals detailed information and an illustrative chart, preventing information overload and encouraging user interaction. The flow concludes with a strong call-to-action section to drive conversions (WhatsApp contact). This non-linear, task-oriented design is more effective for user engagement than a simple top-to-bottom reading of the original text. -->
+    <!-- Visualization & Content Choices: The source marketing text was analyzed to create illustrative visualizations for each service, as no quantitative data was provided. Goal: Compare -> Viz: Bar Chart (Elétrica) to show efficiency gains. Goal: Organize -> Viz: Donut Chart (Automação) to show categories of control. Goal: Organize -> Viz: Radar Chart (Segurança) to show comprehensive coverage. Goal: Change -> Viz: Line Chart (Redes) to illustrate signal improvement. All charts are implemented using Chart.js on Canvas, are revealed on user interaction (tab clicks), and are justified by their ability to visually communicate the core value proposition of each service in a way static text cannot. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div id="app" class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <header class="text-center py-8 md:py-12">
+            <img src="https://i.ibb.co/3cY5VvM/logomarca-jpeg-be961a2d-a33d-4df7-8f39-475995ac1f11.jpg" alt="Logo Fernandes Tecnologias" class="h-24 mx-auto mb-6 rounded-md">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Sua Casa Inteligente, Segura e Eficiente.</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Transformamos seu ambiente com soluções de ponta em elétrica e automação, focadas no seu conforto e tranquilidade.</p>
+            <a href="https://wa.me/5511973085495?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="mt-8 inline-block bg-orange-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-orange-600 transition-transform transform hover:scale-105">
+                Solicitar Orçamento via WhatsApp
+            </a>
+        </header>
+
+        <main>
+            <section id="services" class="py-12 md:py-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Nossas Soluções</h2>
+                    <p class="mt-2 text-md text-gray-600">Explore nossos serviços e descubra como podemos ajudar. Clique em uma categoria para ver os detalhes.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <button data-service="eletrica" class="service-tab text-center p-4 border-b-4 border-transparent rounded-lg bg-gray-100 hover:bg-white transition-all duration-300 active">
+                        <span class="text-3xl">⚡</span>
+                        <h3 class="font-semibold mt-2 text-gray-700">Elétrica</h3>
+                    </button>
+                    <button data-service="automacao" class="service-tab text-center p-4 border-b-4 border-transparent rounded-lg bg-gray-100 hover:bg-white transition-all duration-300">
+                        <span class="text-3xl">💡</span>
+                        <h3 class="font-semibold mt-2 text-gray-700">Automação</h3>
+                    </button>
+                    <button data-service="seguranca" class="service-tab text-center p-4 border-b-4 border-transparent rounded-lg bg-gray-100 hover:bg-white transition-all duration-300">
+                        <span class="text-3xl">🔒</span>
+                        <h3 class="font-semibold mt-2 text-gray-700">Segurança</h3>
+                    </button>
+                    <button data-service="redes" class="service-tab text-center p-4 border-b-4 border-transparent rounded-lg bg-gray-100 hover:bg-white transition-all duration-300">
+                        <span class="text-3xl">🌐</span>
+                        <h3 class="font-semibold mt-2 text-gray-700">Redes & Wi-Fi</h3>
+                    </button>
+                </div>
+
+                <div id="service-content" class="bg-white p-6 md:p-8 rounded-xl shadow-md min-h-[450px]">
+                </div>
+            </section>
+
+            <section id="contact" class="text-center bg-gray-800 text-white py-16 my-12 rounded-xl">
+                 <div class="max-w-3xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold">Pronto para modernizar seu espaço?</h2>
+                    <p class="mt-4 text-lg text-gray-300">Fale com um de nossos especialistas. Estamos prontos para entender sua necessidade e propor a melhor solução, sem compromisso.</p>
+                    <a href="https://wa.me/5511973085495?text=Olá!%20Vi%20o%20site%20e%20gostaria%20de%20fazer%20um%20orçamento." target="_blank" class="mt-8 inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-orange-600 transition-transform transform hover:scale-105">
+                        Fale Conosco Agora
+                    </a>
+                    <p class="mt-6 text-2xl font-semibold tracking-wider">(11) 97308-5495</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 border-t">
+            <p class="text-gray-600">&copy; 2024 Fernandes Tecnologias. Conectamos tecnologia ao seu lar com conforto, segurança e praticidade.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceData = {
+                eletrica: {
+                    title: 'Projetos e Instalações Elétricas',
+                    description: 'Oferecemos soluções elétricas completas, desde o planejamento até a execução final. Garantimos a máxima segurança e qualidade, seguindo todas as normas técnicas para sua residência ou empresa.',
+                    chartType: 'bar',
+                    chartData: {
+                        labels: ['Segurança', 'Eficiência Energética', 'Valorização do Imóvel'],
+                        datasets: [{
+                            label: 'Projeto Otimizado Fernandes',
+                            data: [95, 85, 90],
+                            backgroundColor: 'rgba(30, 58, 138, 0.7)',
+                            borderColor: 'rgba(30, 58, 138, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Instalação Convencional',
+                            data: [60, 50, 40],
+                            backgroundColor: 'rgba(203, 213, 225, 0.7)',
+                            borderColor: 'rgba(203, 213, 225, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    chartOptions: {
+                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.y}%` } }, title: { display: true, text: 'Comparativo de Benefícios (Ilustrativo)' } }
+                    }
+                },
+                automacao: {
+                    title: 'Automação Residencial Inteligente',
+                    description: 'Tenha o controle total da sua casa na palma da sua mão. Integramos sistemas de iluminação, climatização, cortinas, áudio e vídeo para criar ambientes personalizados e eficientes com um simples toque no seu celular.',
+                    chartType: 'doughnut',
+                    chartData: {
+                        labels: ['Iluminação', 'Climatização', 'Cortinas & Persianas', 'Áudio & Vídeo', 'Segurança'],
+                        datasets: [{
+                            label: 'Áreas de Controle',
+                            data: [30, 25, 20, 15, 10],
+                            backgroundColor: ['#1E3A8A', '#2563EB', '#3B82F6', '#60A5FA', '#93C5FD'],
+                            hoverOffset: 4
+                        }]
+                    },
+                    chartOptions: {
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.label}: ${context.parsed}%` } }, title: { display: true, text: 'Distribuição do Controle Residencial (Exemplo)' } }
+                    }
+                },
+                seguranca: {
+                    title: 'Segurança Eletrônica Integrada',
+                    description: 'Proteja o que mais importa com nossos sistemas de segurança. Realizamos a instalação de câmeras de alta definição (CFTV), alarmes monitorados e controle de acesso, tudo integrado para sua total tranquilidade.',
+                    chartType: 'radar',
+                    chartData: {
+                        labels: ['Câmeras (CFTV)', 'Alarmes', 'Controle de Acesso', 'Monitoramento Remoto', 'Integração'],
+                        datasets: [{
+                            label: 'Nível de Cobertura',
+                            data: [9, 8, 8, 9, 10],
+                            fill: true,
+                            backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                            borderColor: 'rgb(30, 58, 138)',
+                            pointBackgroundColor: 'rgb(30, 58, 138)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(30, 58, 138)'
+                        }]
+                    },
+                    chartOptions: {
+                        scales: { r: { beginAtZero: true, max: 10, pointLabels: { font: { size: 10 } } } },
+                        plugins: { legend: { display: false }, title: { display: true, text: 'Abrangência da Solução de Segurança (Ilustrativo)' } }
+                    }
+                },
+                redes: {
+                    title: 'Redes e Conectividade Wi-Fi',
+                    description: 'Acabe com os pontos cegos de Wi-Fi. Projetamos e instalamos redes de dados estruturadas para garantir uma conexão de alta velocidade e estabilidade em todos os ambientes da sua casa ou escritório.',
+                    chartType: 'line',
+                    chartData: {
+                        labels: ['Sala', 'Quarto 1', 'Cozinha', 'Quarto 2', 'Escritório', 'Área Externa'],
+                        datasets: [{
+                            label: 'Rede Estruturada Fernandes',
+                            data: [98, 95, 92, 96, 99, 85],
+                            borderColor: 'rgb(30, 58, 138)',
+                            backgroundColor: 'rgba(30, 58, 138, 0.5)',
+                            tension: 0.1,
+                            fill: true
+                        }, {
+                            label: 'Roteador Padrão',
+                            data: [80, 60, 55, 40, 70, 20],
+                            borderColor: 'rgb(203, 213, 225)',
+                            backgroundColor: 'rgba(203, 213, 225, 0.5)',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    chartOptions: {
+                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.y}% de Sinal` } }, title: { display: true, text: 'Qualidade do Sinal Wi-Fi (Ilustrativo)' } }
+                    }
+                }
+            };
+
+            const contentContainer = document.getElementById('service-content');
+            const serviceTabs = document.querySelectorAll('.service-tab');
+            let currentChart = null;
+
+            function updateContent(serviceKey) {
+                const service = serviceData[serviceKey];
+                if (!service) return;
+
+                contentContainer.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">${service.title}</h3>
+                            <p class="text-gray-600 leading-relaxed">${service.description}</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="serviceChart"></canvas>
+                        </div>
+                    </div>
+                `;
+
+                const ctx = document.getElementById('serviceChart').getContext('2d');
+                if (currentChart) {
+                    currentChart.destroy();
+                }
+
+                const chartConfig = {
+                    type: service.chartType,
+                    data: service.chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        ...service.chartOptions
+                    }
+                };
+                
+                currentChart = new Chart(ctx, chartConfig);
+
+                serviceTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.service === serviceKey) {
+                        tab.classList.add('active');
+                    }
+                });
+            }
+
+            serviceTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const serviceKey = tab.dataset.service;
+                    updateContent(serviceKey);
+                });
+            });
+
+            updateContent('eletrica');
+        });
+    </script>
+</body>
+</html>
