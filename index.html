@@ -47,7 +47,7 @@
     <div id="app" class="container mx-auto px-4 sm:px-6 lg:px-8">
 
         <header class="text-center py-8 md:py-12">
-            <img src="https://github.com/fernandestecnologias/eletrica-e-automacao/blob/main/imagens/logomarca.jpeg?raw=true" alt="Logo Fernandes Tecnologias" class="h-100 mx-auto mb-6 rounded-md">
+            <img src="https://github.com/fernandestecnologias/eletrica-e-automacao/blob/main/imagens/logomarca.jpeg?raw=true" alt="Logo Fernandes Tecnologias" class="h-70 mx-auto mb-6 rounded-md">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Sua Casa Inteligente, Segura e Eficiente.</h1>
             <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Transformamos seu ambiente com soluções de ponta em elétrica e automação, focadas no seu conforto e tranquilidade.</p>
             <a href="https://wa.me/5511973085495?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="mt-8 inline-block bg-orange-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-orange-600 transition-transform transform hover:scale-105">
@@ -88,7 +88,7 @@
             <section id="contact" class="text-center bg-gray-800 text-white py-16 my-12 rounded-xl">
                  <div class="max-w-3xl mx-auto px-4">
                     <h2 class="text-3xl font-bold">Pronto para modernizar seu espaço?</h2>
-                    <p class="mt-4 text-lg text-gray-300">Fale com um de nossos especialistas. Estamos prontos para entender sua necessidade e propor a melhor solução, sem compromisso.</p>
+                    <p class="mt-4 text-lg text-gray-300">Fale com o nosso especialista. Estamos prontos para entender sua necessidade e propor a melhor solução.</p>
                     <a href="https://wa.me/5511973085495?text=Olá!%20Vi%20o%20site%20e%20gostaria%20de%20fazer%20um%20orçamento." target="_blank" class="mt-8 inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-orange-600 transition-transform transform hover:scale-105">
                         Fale Conosco Agora
                     </a>
@@ -98,7 +98,7 @@
         </main>
 
         <footer class="text-center py-6 border-t">
-            <p class="text-gray-600">&copy; 2024 Fernandes Tecnologias. Conectamos tecnologia ao seu lar com conforto, segurança e praticidade.</p>
+            <p class="text-gray-600">&copy; 2025 Fernandes Tecnologias. Conectamos tecnologia ao seu lar com conforto, segurança e praticidade.</p>
         </footer>
     </div>
 
@@ -113,13 +113,13 @@
                         labels: ['Segurança', 'Eficiência Energética', 'Valorização do Imóvel'],
                         datasets: [{
                             label: 'Projeto Otimizado Fernandes',
-                            data: [95, 85, 90],
+                            data: [95, 75, 90],
                             backgroundColor: 'rgba(30, 58, 138, 0.7)',
                             borderColor: 'rgba(30, 58, 138, 1)',
                             borderWidth: 1
                         }, {
                             label: 'Instalação Convencional',
-                            data: [60, 50, 40],
+                            data: [55, 50, 40],
                             backgroundColor: 'rgba(203, 213, 225, 0.7)',
                             borderColor: 'rgba(203, 213, 225, 1)',
                             borderWidth: 1
@@ -127,7 +127,7 @@
                     },
                     chartOptions: {
                         scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
-                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.y}%` } }, title: { display: true, text: 'Comparativo de Benefícios (Ilustrativo)' } }
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.y}%` } }, title: { display: true, text: 'Comparativo de Benefícios' } }
                     }
                 },
                 automacao: {
@@ -144,7 +144,7 @@
                         }]
                     },
                     chartOptions: {
-                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.label}: ${context.parsed}%` } }, title: { display: true, text: 'Distribuição do Controle Residencial (Exemplo)' } }
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: context => `${context.label}: ${context.parsed}%` } }, title: { display: true, text: 'Distribuição do Controle Residencial' } }
                     }
                 },
                 seguranca: {
@@ -152,7 +152,7 @@
                     description: 'Proteja o que mais importa com nossos sistemas de segurança. Realizamos a instalação de câmeras de alta definição (CFTV), alarmes monitorados e controle de acesso, tudo integrado para sua total tranquilidade.',
                     chartType: 'radar',
                     chartData: {
-                        labels: ['Câmeras (CFTV)', 'Alarmes', 'Controle de Acesso', 'Monitoramento Remoto', 'Integração'],
+                        labels: ['Câmeras (CFTV)', 'Alarmes', 'Controle de Acesso', 'Integração'],
                         datasets: [{
                             label: 'Nível de Cobertura',
                             data: [9, 8, 8, 9, 10],
